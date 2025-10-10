@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
+import { filterNotes, Note } from "../utils/notes";
 
-type Note = { id: string; text: string };
+
 type EditState = { id: string | null; text: string };
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
   const [text, setText] = useState("");
   const [editing, setEditing] = useState<EditState>({ id: null, text: "" });
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   async function fetchNotes() {
     const res = await fetch("/api/notes", { cache: "no-store" });
@@ -75,6 +77,8 @@ export default function Home() {
     }
   }
 
+  const filteredNotes = filterNotes(notes, searchQuery);
+
   return (
     <main className="min-h-screen bg-blue-200 p-6">
       <div className="max-w-xl mx-auto">
@@ -93,8 +97,21 @@ export default function Home() {
             {error}
           </div>
         )}
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-xl font-bold text-gray-800">Notes</h2>
+          <div className="text-sm text-gray-600">
+            {filteredNotes.length} result{filteredNotes.length === 1 ? "" : "s"}
+          </div>
+        </div>
+        <input
+          type="search"
+          placeholder="Search notes..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full border rounded px-3 py-2 mb-4"
+        />
         <ul className="space-y-2">
-          {notes.map(n => (
+          {filteredNotes.map(n => (
             <li key={n.id} className="flex items-center justify-between bg-yellow-100 border rounded px-3 py-2">
               {editing.id === n.id ? (
                 <div className="flex-1 flex items-center gap-2">
