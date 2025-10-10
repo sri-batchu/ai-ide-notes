@@ -21,6 +21,20 @@ export async function POST(req: NextRequest) {
   writeNotes(notes);
   return NextResponse.json({ ok: true });
 }
+export async function PATCH(req: NextRequest) {
+  const { id, text } = await req.json();
+  if (!id || !text || typeof text !== "string")
+    return NextResponse.json({ error: "id and text required" }, { status: 400 });
+  if (text.length > 140)
+    return NextResponse.json({ error: "text too long (max 140 chars)" }, { status: 400 });
+  const notes = readNotes();
+  const noteIndex = notes.findIndex(n => n.id === id);
+  if (noteIndex === -1)
+    return NextResponse.json({ error: "note not found" }, { status: 404 });
+  notes[noteIndex].text = text;
+  writeNotes(notes);
+  return NextResponse.json({ ok: true });
+}
 export async function DELETE(req: NextRequest) {
   const id = new URL(req.url).searchParams.get("id");
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
