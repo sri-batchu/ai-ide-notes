@@ -8,7 +8,7 @@ function readNotes(): Array<{id:string;text:string}> {
   if (!fs.existsSync(DATA_PATH)) fs.writeFileSync(DATA_PATH, "[]");
   return JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
 }
-function writeNotes(notes: any) {
+function writeNotes(notes: Array<{id:string;text:string}>) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(notes, null, 2));
 }
 export async function GET() { return NextResponse.json(readNotes()); }

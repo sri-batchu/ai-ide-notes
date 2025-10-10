@@ -61,7 +61,7 @@ export default function Home() {
       setEditing({ id: null, text: "" });
       setError("");
       fetchNotes();
-    } catch (err) {
+    } catch {
       setError("Failed to save note");
     }
   }
