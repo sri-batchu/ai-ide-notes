@@ -76,9 +76,9 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
+    <main className="min-h-screen bg-blue-200 p-6">
       <div className="max-w-xl mx-auto">
-        <h1 className="text-3xl font-bold mb-4">Notes</h1>
+        <h1 className="text-3xl font-bold mb-4 text-black">Notes</h1>
         <form onSubmit={addNote} className="flex gap-2 mb-6">
           <input
             className="flex-1 border rounded px-3 py-2"
@@ -95,7 +95,7 @@ export default function Home() {
         )}
         <ul className="space-y-2">
           {notes.map(n => (
-            <li key={n.id} className="flex items-center justify-between bg-white border rounded px-3 py-2">
+            <li key={n.id} className="flex items-center justify-between bg-yellow-100 border rounded px-3 py-2">
               {editing.id === n.id ? (
                 <div className="flex-1 flex items-center gap-2">
                   <input
@@ -121,7 +121,7 @@ export default function Home() {
                 </div>
               ) : (
                 <>
-                  <span className="flex-1">{n.text}</span>
+                  <span className="flex-1 text-black">{n.text}</span>
                   <div className="flex gap-2">
                     <button
                       onClick={() => startEdit(n)}
