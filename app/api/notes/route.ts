@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 
+// API routes for notes management
+
 const DATA_PATH = path.join(process.cwd(), "data", "notes.json");
 function readNotes(): Array<{id:string;text:string}> {
   if (!fs.existsSync(DATA_PATH)) fs.writeFileSync(DATA_PATH, "[]");
