@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 
-// API routes for notes management
+// API routes for notes management - updated for new username
 
 const DATA_PATH = path.join(process.cwd(), "data", "notes.json");
 function readNotes(): Array<{id:string;text:string}> {
