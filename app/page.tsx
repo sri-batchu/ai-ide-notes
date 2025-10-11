@@ -80,7 +80,7 @@ export default function Home() {
   const filteredNotes = filterNotes(notes, searchQuery);
 
   return (
-    <main className="min-h-screen bg-blue-200 p-6">
+    <main className="min-h-screen bg-green-200 p-6">
       <div className="max-w-xl mx-auto">
         <h1 className="text-3xl font-bold mb-4 text-black">Notes</h1>
         <form onSubmit={addNote} className="flex gap-2 mb-6">
